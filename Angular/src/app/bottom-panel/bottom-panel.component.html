@@ -1,0 +1,50 @@
+<mat-toolbar class="mt-toolbar">
+    <span>Kategorie</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button (click)="openAddEditKategorieForm()" class="kolor"> 
+      Dodaj Kategorie
+    </button>
+    <button mat-raised-button (click)="closePanel()" class="kolor"> 
+        Zamknij
+    </button>
+</mat-toolbar>
+
+  <section class="example-container mat-elevation-z8" tabindex="0">
+    <table mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="nazwa">
+        <th mat-header-cell *matHeaderCellDef> nazwa </th>
+        <td mat-cell *matCellDef="let element"> {{element.nazwa}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="adres_sklepu">
+        <th mat-header-cell *matHeaderCellDef> adres sklepu</th>
+        <td mat-cell *matCellDef="let element"> {{element.adres_sklepu}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="czy_mozliwa_rezerwacja">
+        <th mat-header-cell *matHeaderCellDef> czy mozliwa rezerwacja </th>
+        <td mat-cell *matCellDef="let element"> {{element.czy_mozliwa_rezerwacja}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="akcje">
+        <th mat-header-cell *matHeaderCellDef> akcje </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="openEditForm(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteKategoria(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </section>

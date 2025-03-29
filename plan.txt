@@ -1,0 +1,6 @@
+dodawanie produktów
+dodawanie kategori w odzielnej tabeli z relacja jeden do wielu z produktami
+Sortowanie produktów
+Filtr do wyszukiwania
+Zmiana wyświetlania lista/obrazy
+

@@ -1,0 +1,24 @@
+*{
+    background-color: gray;
+}
+
+
+.content{
+    padding-top: 10px;
+    flex-direction: column;
+}
+
+
+.row{
+    display: flex;
+    gap: 10px;
+
+    mat-form-field{
+        width: 100%;
+    }
+}
+
+
+.actions{
+    padding: 0 25px 20px;
+}

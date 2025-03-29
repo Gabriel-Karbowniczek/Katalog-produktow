@@ -1,0 +1,28 @@
+<div mat-dialog-title>
+    <h1>Formularz</h1>
+</div>
+<form [formGroup]="kategorieForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content2">
+      <div class="row2">
+        <mat-form-field appearance="outline">
+          <mat-label>Nazwa</mat-label>
+          <input matInput formControlName="nazwa">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Adres</mat-label>
+          <input matInput formControlName="adres_sklepu">
+        </mat-form-field>
+      </div>
+      <div class="row2">
+        <label>Czy możliwa rezerwacja</label>
+        <mat-radio-group formControlName="czy_mozliwa_rezerwacja">
+          <mat-radio-button value="tak">Tak</mat-radio-button>
+          <mat-radio-button value="nie">Nie</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div mat-dialog-actions class="actions2">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Anuluj</button>
+      <button mat-raised-button color="primary" type="submit">{{data ? 'Zmień' : 'Zapisz'}}</button>
+    </div>
+  </form>

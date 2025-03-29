@@ -1,0 +1,30 @@
+.mt-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  max-width: 100%; 
+  position: sticky; 
+  padding: 10px;
+  margin-top: 8px;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  button{
+    margin-left: 10px;
+  }
+
+  .kolor{
+    background-color: #424242;
+  }
+
+
+  .example-container {
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }

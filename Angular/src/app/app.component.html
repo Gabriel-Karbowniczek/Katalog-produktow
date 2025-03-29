@@ -1,0 +1,113 @@
+<mat-toolbar>
+  <span>Katalog Produktów</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button (click)="openAddEditProduktyForm()"> 
+    Dodaj produkt
+  </button>
+  <button mat-raised-button (click)="openBottomSheet()">
+    Wyswietl Kategorie
+  </button>
+  <button mat-raised-button (click)="toggleView()">
+    {{ tableView ? 'Zmień na widok kart' : 'Zmień na widok tabeli' }}
+  </button>
+</mat-toolbar>
+
+
+<div class="main-body">
+  <mat-form-field>
+    <mat-label>Filtr</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Np: Elektronika" #input>
+  </mat-form-field>
+  
+  <div *ngIf="tableView">
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="kategoria">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> kategoria </th>
+        <td mat-cell *matCellDef="let row"> {{row.kategoria_nazwa}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="nazwa">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> nazwa </th>
+        <td mat-cell *matCellDef="let row"> {{row.nazwa}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="opis">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> opis </th>
+        <td mat-cell *matCellDef="let row"> {{row.opis}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cena">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> cena </th>
+        <td mat-cell *matCellDef="let row"> {{row.cena}}zł </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="zdjecie">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> zdjecie </th>
+        <td mat-cell *matCellDef="let row"> {{row.zdjecie}} </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> akcje </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="openEditForm(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteProdukt(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <ng-container *ngIf="UseSnackBar(input.value)">
+        </ng-container>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>
+
+<div *ngIf="!tableView">
+  <div *ngIf="filteredProduktyList.length > 0; else emptyList" class="cards-container">
+  <div class="card" *ngFor="let produkt of filteredProduktyList">
+    <img [src]="'/assets/img/'+produkt.zdjecie" alt="Zdjęcie produktu" class="card-image">
+    <div class="card-content">
+      <h3>{{ produkt.nazwa }}</h3>
+      <p>Kategoria: {{ produkt.kategoria_nazwa }}</p>
+      <p>Cena: {{ produkt.cena }}zł</p>
+      <p>{{ produkt.opis }}</p>
+    </div>
+  </div>
+  </div>
+  <ng-template #emptyList>
+    {{ UseSnackBar(input.value) }}
+  </ng-template>
+</div>
+<!-- <div *ngIf="!tableView" class="cards-container">
+  <div *ngIf="filteredProduktyList.length > 0; else noData">
+    <div class="card" *ngFor="let produkt of filteredProduktyList">
+      <img [src]="produkt.zdjecie" alt="Zdjęcie produktu" class="card-image">
+      <div class="card-content">
+        <h3>{{ produkt.nazwa }}</h3>
+        <p>Kategoria: {{ produkt.kategoria_nazwa }}</p>
+        <p>Cena: {{ produkt.cena }}</p>
+        <p>{{ produkt.opis }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #noData>
+    <p>Brak danych do wyświetlenia.</p>
+  </ng-template>
+</div> -->
+</div>
